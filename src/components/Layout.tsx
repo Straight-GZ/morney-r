@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  color:#333;
   height: 100vh;
   display: flex;
   flex-direction: column;
