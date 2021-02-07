@@ -17,3 +17,8 @@ body {
 button{
 	font-family:inherit;
 }
+.clearfix::after{
+	content: '';
+	display: block;
+	clear: both;
+}
