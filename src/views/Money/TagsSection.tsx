@@ -21,34 +21,38 @@ const Wrapper = styled.section`
       margin-top: 8px;
   }
 `;
-const TagsSection:React.FC = () =>{
-  const [tags,setTags]=useState<string[]>(['衣','食','住','行']);
-  const [selectedTags,setSelectedTags]=useState<string[]>([])
-  const onAddTag=()=>{
-    const name=window.prompt('请输入标签名')
-    if(name){
-      setTags([...tags,name])
+type Props = {
+  value: string[];
+  onChange: (value: string[]) => void
+}
+const TagsSection: React.FC<Props> = (props) => {
+  const selectedTags = props.value;
+  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行']);
+  const onAddTag = () => {
+    const name = window.prompt('请输入标签名');
+    if (name) {
+      setTags([...tags, name]);
     }
-  }
-  const onToggleTag=(tag:string)=>{
-    const index=selectedTags.indexOf(tag)
-    if(index>=0){
-      setSelectedTags(selectedTags.filter(t=>t!==tag))
-    }else{
-      setSelectedTags([...selectedTags,tag])
+  };
+  const onToggleTag = (tag: string) => {
+    const index = selectedTags.indexOf(tag);
+    if (index >= 0) {
+      props.onChange(selectedTags.filter(t => t !== tag));
+    } else {
+      props.onChange([...selectedTags, tag]);
     }
-  }
-  const getClass=(tag:string)=>selectedTags.indexOf(tag)>=0 ? 'selected' : ''
+  };
+  const getClass = (tag: string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : '';
   return (
     <Wrapper>
       <ol>
-        {tags.map(tag=>
-          <li key={tag} onClick={()=>{onToggleTag(tag)}}
-          className={getClass(tag)}>{tag}</li>
+        {tags.map(tag =>
+          <li key = {tag} onClick = {() => {onToggleTag(tag);}}
+              className = {getClass(tag)}>{tag}</li>
         )}
       </ol>
-      <button onClick={onAddTag}>新增标签</button>
+      <button onClick = {onAddTag}>新增标签</button>
     </Wrapper>
-  )
-}
-export {TagsSection}
+  );
+};
+export {TagsSection};
