@@ -57,6 +57,8 @@ const Wrapper = styled.section`
 `;
 const NumberPad = () => {
   const [output, _setOutput] = useState('0');
+  const [type, setType] = useState('');
+  const [result, setResult] = useState('0');
   const setOutput = (output: string) => {
     if (output.length > 16) {
       output = output.slice(0, 16);
@@ -79,40 +81,60 @@ const NumberPad = () => {
       case '7':
       case '8':
       case '9':
-        if (output === '0') {
+        if (type === '=') {
           setOutput(text);
+          setType('');
         } else {
-          setOutput(output + text);
+          if (output === '0') {
+            setOutput(text);
+          } else {
+            setOutput(output + text);
+          }
         }
         break;
       case '+':
       case '-':
       case '*':
       case '÷':
-        console.log(text);
+        setType(text);
+        setResult(output);
+        _setOutput('0');
         break;
       case '.':
         if (output.indexOf('.') >= 0) {return;}
         setOutput(output + '.');
         break;
       case '清空':
+        setType('');
         setOutput('');
         break;
       case '删除':
-        if (output.length === 1) {
+        if (type === '=' || output.length === 1) {
           setOutput('');
         } else {
           setOutput(output.slice(0, -1));
         }
         break;
       case 'ok':
-        console.log('ok');
+        const resultNum = parseFloat(result);
+        const outputNum = parseFloat(output);
+        if (type === '+') {
+          _setOutput((resultNum + outputNum).toString());
+        } else if (type === '-') {
+          _setOutput((resultNum - outputNum).toString());
+        } else if (type === '*') {
+          _setOutput((resultNum * outputNum).toString());
+        } else if (type === '÷') {
+          _setOutput((resultNum / outputNum).toString());
+        }
+        setType('=');
         break;
     }
   };
   return (
     <Wrapper>
       <output>{output}</output>
+      {type}
       <div className = 'clearfix' onClick = {onClickButtonWrapper}>
         <button>1</button>
         <button>2</button>
