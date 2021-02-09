@@ -6,9 +6,10 @@ const Label = styled.label`
     align-items: center;
     > span{margin-right: 16px;white-space: nowrap}
     > input{
+      font-size: 16px;
       display: block;
       width: 100%;
-      height: 72px;
+      height: 44px;
       background: none;
       border:none;
     }

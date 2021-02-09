@@ -5,13 +5,15 @@ import {Link} from 'react-router-dom';
 import {Layout} from '../components/Layout';
 import {Icon} from '../components/Icon';
 import {Button} from '../components/Button';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 const TagList = styled.ol`
   font-size: 16px;
   background: white;
   > li{
     border-bottom:1px solid #d5d5d5;
-    margin:0 16px ;
+    margin-left:16px ;
     > a{
       display: flex;
       padding: 12px 16px 12px 0;
@@ -21,14 +23,6 @@ const TagList = styled.ol`
   }
 `;
 
-const Center = styled.div`
-  margin-top: 32px;
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
 
 function Tags() {
   const {tags} = useTags();
@@ -45,6 +39,11 @@ function Tags() {
         )}
       </TagList>
       <Center>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
         <Button>新建标签</Button>
       </Center>
     </Layout>

@@ -6,6 +6,8 @@ import {Icon} from '../components/Icon';
 import {Button} from '../components/Button';
 import styled from 'styled-components';
 import {Input} from '../components/Input';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 const Header = styled.header`
   background: white;
@@ -14,6 +16,11 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+const Wrapper = styled.div`
+  background: white;
+  padding: 0 16px;
+  margin-top: 16px;
 `;
 type Params = { id: string }
 const Tag: React.FC = () => {
@@ -27,8 +34,17 @@ const Tag: React.FC = () => {
         <span>编辑标签</span>
         <Icon/>
       </Header>
-      <Input label = '标签名' value = {tag.name}/>
-      <Button>删除标签</Button>
+      <Wrapper>
+        <Input label = '标签名' type = 'text' value = {tag.name}/>
+      </Wrapper>
+      <Center>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Space/>
+        <Button>删除标签</Button>
+      </Center>
     </Layout>
   );
 };
