@@ -24,9 +24,9 @@ const Wrapper = styled.div`
 `;
 type Params = { id: string }
 const Tag: React.FC = () => {
-  let {id} = useParams<Params>();
-  const {findTag} = useTags();
-  const tag = findTag(parseInt(id));
+  let {id: idString} = useParams<Params>();
+  const {findTag, updateTag} = useTags();
+  const tag = findTag(parseInt(idString));
   return (
     <Layout>
       <Header>
@@ -34,8 +34,12 @@ const Tag: React.FC = () => {
         <span>编辑标签</span>
         <Icon/>
       </Header>
-      <Wrapper>
-        <Input label = '标签名' type = 'text' value = {tag.name}/>
+      <Wrapper>{tag &&
+			<Input label = '标签名' type = 'text' value = {tag.name}
+						 onChange = {(e) => {
+               updateTag(tag.id, {name: e.target.value});
+             }}
+			/>}
       </Wrapper>
       <Center>
         <Space/>
