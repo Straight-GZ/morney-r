@@ -1,10 +1,10 @@
 import React from 'react';
 import {HashRouter as Router, Switch, Route, Redirect} from "react-router-dom";
-import Money from './views/Money';
-import Statistics from './views/Statistics';
-import Tags from './views/Tags';
-import NoMatch from './views/NoMatch';
-import {Tag} from './views/tag';
+import {Tag} from "./views/Tag";
+import {Money} from './views/Money';
+import {Statistics} from './views/Statistics';
+import {Tags} from './views/Tags';
+import {NoMatch} from './views/NoMatch';
 
 
 function App() {
@@ -32,4 +32,4 @@ function App() {
 }
 
 
-export default App;
+export {App};

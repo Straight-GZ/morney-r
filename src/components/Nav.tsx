@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import React from 'react';
-import Icon from './Icon';
+import {Icon} from './Icon';
 
 const NavWrapper = styled.div`
   background: white;
@@ -58,4 +58,4 @@ const Nav = () => {
     </NavWrapper>);
 };
 
-export default Nav;
+export {Nav};

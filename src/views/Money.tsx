@@ -1,10 +1,10 @@
-import Layout from '../components/Layout';
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {CategorySection} from './Money/CategroySection';
 import {NumberPad} from './Money/NumberPadSection';
 import {NoteSection} from './Money/NoteSection';
 import {TagsSection} from './Money/TagsSection';
+import {Layout} from '../components/Layout';
 
 
 const NewLayout = styled(Layout)`
@@ -41,4 +41,4 @@ function Money() {
   );
 }
 
-export default Money;
+export {Money};

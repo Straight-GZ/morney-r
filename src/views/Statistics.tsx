@@ -1,4 +1,4 @@
-import Layout from '../components/Layout';
+import { Layout } from 'components/Layout';
 import React from 'react';
 
 function Statistics() {
@@ -9,4 +9,4 @@ function Statistics() {
   );
 }
 
-export default Statistics;
+export {Statistics};
