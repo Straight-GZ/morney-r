@@ -22,6 +22,9 @@ const Wrapper = styled.div`
   padding: 0 16px;
   margin-top: 16px;
 `;
+const Div = styled.div`
+  margin-top: 30px;
+`;
 type Params = { id: string }
 const Tag: React.FC = () => {
   let {id: idString} = useParams<Params>();
@@ -53,9 +56,10 @@ const Tag: React.FC = () => {
         <span>编辑标签</span>
         <Icon/>
       </Header>
-      {tag ? tagContent(tag) : <div>
-        <Center>tag不存在</Center>
-      </div>}
+      {tag ? tagContent(tag) : <Div>
+        <Center>
+          已删除</Center>
+      </Div>}
     </Layout>
   );
 };
