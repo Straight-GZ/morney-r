@@ -5,6 +5,7 @@ import {NumberPad} from './Money/NumberPadSection';
 import {NoteSection} from './Money/NoteSection';
 import {TagsSection} from './Money/TagsSection';
 import {Layout} from '../components/Layout';
+import {useRecord} from '../hooks/useRecords';
 
 
 const NewLayout = styled(Layout)`
@@ -26,6 +27,10 @@ function Money() {
       ...obj
     });
   };
+  const {records, addRecord} = useRecord();
+  const submit = () => {
+    addRecord(selected);
+  };
   return (
     <NewLayout>
       <TagsSection value = {selected.tagIds}
@@ -36,7 +41,7 @@ function Money() {
                        onChange = {category => onChange({category})}/>
       <NumberPad value = {selected.amount}
                  onChange = {amount => onChange({amount})}
-                 onOk = {() => {}}/>;
+                 onOk = {submit}/>;
     </NewLayout>
   );
 }
