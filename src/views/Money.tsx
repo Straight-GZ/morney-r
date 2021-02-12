@@ -13,14 +13,15 @@ const NewLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
+const defaultRecord = {
+  tagIds: [] as number[],
+  note: '',
+  category: '-' as ('+' | '-'),
+  amount: 0
+};
 
 function Money() {
-  const [selected, setSelected] = useState({
-    tagIds: [] as number[],
-    note: '',
-    category: '-' as ('+' | '-'),
-    amount: 0
-  });
+  const [selected, setSelected] = useState(defaultRecord);
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
       ...selected,
@@ -30,6 +31,8 @@ function Money() {
   const {records, addRecord} = useRecord();
   const submit = () => {
     addRecord(selected);
+    alert('已保存');
+    setSelected(defaultRecord);
   };
   return (
     <NewLayout>
