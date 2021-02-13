@@ -28,11 +28,12 @@ function Money() {
       ...obj
     });
   };
-  const {records, addRecord} = useRecord();
+  const {addRecord} = useRecord();
   const submit = () => {
-    addRecord(selected);
-    alert('已保存');
-    setSelected(defaultRecord);
+    if (addRecord(selected)) {
+      alert('已保存');
+      setSelected(defaultRecord);
+    }
   };
   return (
     <NewLayout>
