@@ -26,3 +26,8 @@ svg {
 	width: 24px;
 	height: 24px;
 }
+.oneLine {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

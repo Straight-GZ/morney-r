@@ -85,7 +85,7 @@ function Statistics() {
               {records
                 .map(r => {
                   return <Item key = {r.createAt}>
-                    <div className = 'tags'>
+                    <div className = 'tags oneLine'>
                       {r.tagIds.map(tagId => <span
                         key = {tagId}>{getName(tagId)}{r.tagIds.indexOf(tagId) < r.tagIds.length - 1 ? '，' : ''}</span>)
                       }
