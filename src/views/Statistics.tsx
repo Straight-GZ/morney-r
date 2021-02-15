@@ -23,6 +23,14 @@ const CategoryWrapper = styled.div`
   background: white;
 `;
 
+const Title = styled.h3`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 16px;
+`;
 
 function Statistics() {
   const [category, setCategory] = useState<'+' | '-'>('-');
@@ -69,14 +77,18 @@ function Statistics() {
       <div>
         {array.map(([date, records]) => {
           return <div key = {date}>
-            <h3>{beautify(date)}</h3>
-            <span>{records.reduce((sum, x) => sum += x.amount, 0)}</span>
+            <Title>
+              <h3>{beautify(date)}</h3>
+              <span>￥{records.reduce((sum, x) => sum += x.amount, 0)}</span>
+            </Title>
             <div>
               {records
                 .map(r => {
                   return <Item key = {r.createAt}>
                     <div className = 'tags'>
-                      {r.tagIds.map(tagId => <span key = {tagId}>{getName(tagId)}</span>)}
+                      {r.tagIds.map(tagId => <span
+                        key = {tagId}>{getName(tagId)}{r.tagIds.indexOf(tagId) < r.tagIds.length - 1 ? '，' : ''}</span>)
+                      }
                     </div>
                     <div className = "note">
                       {r.note}
