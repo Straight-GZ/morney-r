@@ -21,6 +21,11 @@ const Wrapper = styled.section`
         left: 0;
       }
     }
+    @media (max-width: 320px){
+      > li{
+        padding: 10px;
+      }
+    }
   }
 `;
 const categoryMap = {'-': '支出', '+': '收入'};
