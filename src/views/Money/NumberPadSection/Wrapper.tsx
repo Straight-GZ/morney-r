@@ -48,14 +48,6 @@ const Wrapper = styled.section`
         background:#9a9a9a;
       }
     }
-    @media (max-width: 320px){
-      > button{
-        height: 40px;
-        &.ok{
-          height: 80px;
-        }
-      }
-    }
   }
 `;
 export {Wrapper};
