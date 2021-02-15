@@ -39,8 +39,7 @@ function Money() {
     }
   };
   return (
-    <NewLayout>
-      {JSON.stringify(selected)}
+    <NewLayout scrollTop={9999}>
       <TagsSection value = {selected.tagIds}
                    onChange = {tagIds => onChange({tagIds})}/>
       <NoteSection value = {selected.note}

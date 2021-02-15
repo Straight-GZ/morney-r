@@ -78,7 +78,7 @@ function Statistics() {
         {array.map(([date, records]) => {
           return <div key = {date}>
             <Title>
-              <h3>{beautify(date)}</h3>
+              <span>{beautify(date)}</span>
               <span>￥{records.reduce((sum, x) => sum += x.amount, 0)}</span>
             </Title>
             <div>
