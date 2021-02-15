@@ -2,8 +2,9 @@ import {Layout} from 'components/Layout';
 import React, {useState} from 'react';
 import {CategorySection} from './Money/CategroySection';
 import {useTags} from '../hooks/useTags';
-import {useRecord} from '../hooks/useRecords';
+import {RecordItem, useRecord} from '../hooks/useRecords';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 const Item = styled.div`
   background: white;
@@ -22,10 +23,42 @@ const CategoryWrapper = styled.div`
   background: white;
 `;
 
+
 function Statistics() {
   const [category, setCategory] = useState<'+' | '-'>('-');
   const {getName} = useTags();
   const {records} = useRecord();
+  const selected = records.filter(r => r.category === category);
+  const hash: { [key: string]: RecordItem[] } = {};
+  selected.map(x => {
+    const key = dayjs(x.createAt).format('YYYY-MM-DD');
+    if (!(key in hash)) {
+      hash[key] = [];
+    }
+    hash[key].push(x);
+  });
+
+  const beautify = (string: string) => {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(now, 'day')) {
+      return '今天';
+    } else if (day.isSame(now.subtract(1, 'day'), 'day')) {
+      return '昨天';
+    } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
+      return '前天';
+    } else if (day.isSame(now, 'year')) {
+      return day.format('M月D日');
+    } else {
+      return string;
+    }
+  };
+  const array = Object.entries(hash).sort((a, b) => {
+    if (a[0] === b[0]) {return 0;}
+    if (a[0] > b[0]) {return -1;}
+    if (a[0] < b[0]) {return 1;}
+    return 0;
+  });
   return (
     <Layout>
       <CategoryWrapper>
@@ -34,18 +67,27 @@ function Statistics() {
 
       </CategoryWrapper>
       <div>
-        {records.filter(r => r.category === category).map((r, index) => {
-          return <Item key = {index}>
-            <div className = 'tags'>
-              {r.tagIds.map((tagId, index) => <span key = {index}>{getName(tagId)}</span>)}
+        {array.map(([date, records]) => {
+          return <div key = {date}>
+            <h3>{beautify(date)}</h3>
+            <span>{records.reduce((sum, x) => sum += x.amount, 0)}</span>
+            <div>
+              {records
+                .map(r => {
+                  return <Item key = {r.createAt}>
+                    <div className = 'tags'>
+                      {r.tagIds.map(tagId => <span key = {tagId}>{getName(tagId)}</span>)}
+                    </div>
+                    <div className = "note">
+                      {r.note}
+                    </div>
+                    <div className = "amount">
+                      ￥{r.amount}
+                    </div>
+                  </Item>;
+                })}
             </div>
-            <div className = "note">
-              {r.note}
-            </div>
-            <div className = "amount">
-              {r.amount}
-            </div>
-          </Item>;
+          </div>;
         })}
       </div>
     </Layout>
